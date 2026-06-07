@@ -9,14 +9,15 @@ export function initFiltering(elements, indexes) {
       .forEach((elementName) => {                        // Перебираем по именам
         elements[elementName].append(                    // в каждый элемент добавляем опции
             ...Object.values(indexes[elementName])        // формируем массив имён, значений опций
-                      .map(name => {                        // используйте name как значение и текстовое содержимое
+                      .map(name => {    
+                            // @todo: создать и вернуть тег опции                    // используйте name как значение и текстовое содержимое
                            const element = document.createElement('option');
                            element.textContent = name;
                            element.value = name;
-                           return element;                    // @todo: создать и вернуть тег опции
-                      })
-        )
-     })
+                           return element;
+                      }),
+        );
+     });
 
     return (data, state, action) => {
         // @todo: #4.2 — обработать очистку поля
@@ -28,6 +29,8 @@ export function initFiltering(elements, indexes) {
             inputElem.value = '';
             state[field] = '';
         }
+
+        state.total = [state.totalFrom, state.totalTo]; 
 
         // @todo: #4.5 — отфильтровать данные используя компаратор
         return data.filter(row => compare(row, state));

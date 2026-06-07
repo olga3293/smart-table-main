@@ -236,7 +236,7 @@ function compare(source, target, rulesList) {
         if (Object.prototype.hasOwnProperty.call(target, key)) {
             const targetValue = target[key];
             const sourceValue = source[key];
-
+        
             // Применяем каждое правило по порядку
             let skipProperty = false;
             let ruleResult = null;
